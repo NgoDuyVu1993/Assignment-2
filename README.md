@@ -88,16 +88,16 @@ Reset database by dropping tables: `npm run migrate-down` <br/>
 
 ## Database Schema and Endpoints
 The following diagram is the database Schema 
-[REQUIREMENTS file](https://github.com/NgoDuyVu1993/Assignment-1/blob/main/image/Store%20front%20Database%20Schema.JPG)
+(REQUIREMENTS file](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Store%20front%20Database%20Schema.JPG)
 
 # Manualy use the Server
 1. To start use the server, add and remove Users / Products / Orders, we must first get Token
-[Get Token](https://github.com/NgoDuyVu1993/Assignment-1/blob/main/image/Create%20New%20User.jpg)
+![Get Token](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Create%20New%20User.jpg)
 
 2. After obtaining token, we can use it for all API like get Users by Id
-[Get Users](https://github.com/NgoDuyVu1993/Assignment-1/blob/main/image/Get%20User%20by%20Id.jpg)
+![Get Users](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Get%20User%20by%20Id.jpg)
 
 3. The Token can also be used for Authenticate API
-[Authenticate](https://github.com/NgoDuyVu1993/Assignment-1/blob/main/image/Authenticate%20User.jpg)
+![Authenticate](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Authenticate%20User.jpg)
 
 4. The APIs of Product and Order can be used similarly
