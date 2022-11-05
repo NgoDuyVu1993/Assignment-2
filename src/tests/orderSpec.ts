@@ -104,7 +104,9 @@ describe('Test Order API Endpoint Response', () => {
 
   // Test Get Order by Id
   it('Should get order that has userID 2 in the Endpoint', async () => {
-    const response = await request.get('/orders/2');
+    const response = await request
+      .get('/orders/2')
+      .set({ Authorization: JSON.parse(testUser.text).token });
     const result = JSON.parse(response.text);
     expect(result.quantity).toEqual(4);
     expect(result.status).toEqual('Out of Stock');
@@ -113,7 +115,9 @@ describe('Test Order API Endpoint Response', () => {
 
   // Test Get All Orders
   it('Should list order in the Endpoint', async () => {
-    const response = await request.get('/orders/');
+    const response = await request
+      .get('/orders/')
+      .set({ Authorization: JSON.parse(testUser.text).token });
     const result = JSON.parse(response.text);
     expect(result.length).toBeTruthy();
   });

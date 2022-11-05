@@ -13,7 +13,7 @@ const indexOrders = async (_request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -24,7 +24,7 @@ const showOrders = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -41,7 +41,7 @@ const createOrders = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -52,13 +52,13 @@ const deleteOrders = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
 const order_routes = (app) => {
-    app.get('/orders/', indexOrders);
-    app.get('/orders/:id', showOrders);
+    app.get('/orders/', verifyToken_1.default, indexOrders);
+    app.get('/orders/:id', verifyToken_1.default, showOrders);
     app.post('/orders', verifyToken_1.default, createOrders);
     app.delete('/orders/delete/:id', verifyToken_1.default, deleteOrders);
 };

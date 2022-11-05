@@ -78,7 +78,8 @@ describe('Test User API Endpoint Response', () => {
     it('Should create a user in the Endpoint', async () => {
         const response = await request
             .post('/users')
-            .send(testUser_3);
+            .send(testUser_3)
+            .set({ Authorization: JSON.parse(testUser_1.text).token });
         expect(response.status).toEqual(200);
     });
     // Test Get User by username
@@ -91,7 +92,7 @@ describe('Test User API Endpoint Response', () => {
     });
     // Test Get All Users
     it('Should list product in the Endpoint', async () => {
-        const response = await request.get('/users');
+        const response = await request.get('/users').set({ Authorization: JSON.parse(testUser_1.text).token });
         const result = JSON.parse(response.text);
         expect(result.length).toBeTruthy();
     });

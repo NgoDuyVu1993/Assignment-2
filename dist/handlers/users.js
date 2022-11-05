@@ -14,7 +14,7 @@ const indexUsers = async (_request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -25,7 +25,7 @@ const showUsers = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -43,7 +43,7 @@ const createUsers = async (request, response) => {
         response.json({ ...result, token: `Token ${token}` });
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -54,7 +54,7 @@ const deleteUsers = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -66,12 +66,12 @@ const authenticate = async (request, response) => {
         response.json({ ...result, token: `Token ${token}` });
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
 const user_routers = (app) => {
-    app.get('/users', indexUsers);
+    app.get('/users', verifyToken_1.default, indexUsers);
     app.get('/users/:username', verifyToken_1.default, showUsers);
     app.post('/users', createUsers);
     app.post('/users/authenticate', authenticate);

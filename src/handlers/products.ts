@@ -10,7 +10,7 @@ const indexProducts = async (_request: Request, response: Response) => {
     const result = await store.index();
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -21,7 +21,7 @@ const showProducts = async (request: Request, response: Response) => {
     const result = await store.show(request.params.id);
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -38,7 +38,7 @@ const createProducts = async (request: Request, response: Response) => {
     const result = await store.create(product);
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -49,14 +49,14 @@ const deleteProducts = async (request: Request, response: Response) => {
     const result = await store.delete(request.params.id);
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
 
 const product_rounters = (app: express.Application) => {
-  app.get('/products', indexProducts);
-  app.get('/products/:id', showProducts);
+  app.get('/products', verifyAuthToken, indexProducts);
+  app.get('/products/:id', verifyAuthToken, showProducts);
   app.post('/products', verifyAuthToken, createProducts);
   app.delete('/product/delete/:id', verifyAuthToken, deleteProducts);
 };

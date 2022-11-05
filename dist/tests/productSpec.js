@@ -75,7 +75,9 @@ describe('Test Product API Endpoint Response', () => {
     });
     // Test Get Product by Id
     it('Should get product by ID in the Endpoint', async () => {
-        const response = await request.get('/products/3');
+        const response = await request
+            .get('/products/3')
+            .set({ Authorization: JSON.parse(testUser.text).token });
         const result = JSON.parse(response.text);
         expect(result.name).toEqual('Iphone');
         expect(result.price).toEqual(24000);
@@ -83,7 +85,9 @@ describe('Test Product API Endpoint Response', () => {
     });
     // Test Get All Product
     it('Should list product in the Endpoint', async () => {
-        const response = await request.get('/products/');
+        const response = await request
+            .get('/products/')
+            .set({ Authorization: JSON.parse(testUser.text).token });
         const result = JSON.parse(response.text);
         expect(result.length).toBeTruthy();
     });

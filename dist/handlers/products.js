@@ -13,7 +13,7 @@ const indexProducts = async (_request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -24,7 +24,7 @@ const showProducts = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -40,7 +40,7 @@ const createProducts = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
@@ -51,13 +51,13 @@ const deleteProducts = async (request, response) => {
         response.json(result);
     }
     catch (error) {
-        response.status(401);
+        response.status(500);
         response.json(error);
     }
 };
 const product_rounters = (app) => {
-    app.get('/products', indexProducts);
-    app.get('/products/:id', showProducts);
+    app.get('/products', verifyToken_1.default, indexProducts);
+    app.get('/products/:id', verifyToken_1.default, showProducts);
     app.post('/products', verifyToken_1.default, createProducts);
     app.delete('/product/delete/:id', verifyToken_1.default, deleteProducts);
 };

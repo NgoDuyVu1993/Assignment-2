@@ -1,5 +1,7 @@
 # Assignment-2 Storefront Backend Project
-The Application is for the second Assignment of Udacity Full Stack Javascript
+The Application is for the second Assignment of Udacity Full Stack Javascript<br/>
+The database is running on port 5432<br/>
+The Server Backend is running on port 3000<br/>
 
 # What I learnt
 - Design Database Schema

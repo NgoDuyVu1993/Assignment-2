@@ -11,7 +11,7 @@ const indexUsers = async (_request: Request, response: Response) => {
     const result = await store.index();
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -22,7 +22,7 @@ const showUsers = async (request: Request, response: Response) => {
     const result = await store.show(request.params.username);
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -40,7 +40,7 @@ const createUsers = async (request: Request, response: Response) => {
     var token = jwt.sign({ user: result }, process.env.TOKEN_SECRET as string);
     response.json({ ...result, token: `Token ${token}` });
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -51,7 +51,7 @@ const deleteUsers = async (request: Request, response: Response) => {
     const result = await store.delete(request.params.id);
     response.json(result);
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
@@ -66,13 +66,13 @@ const authenticate = async (request: Request, response: Response) => {
     var token = jwt.sign({ user: result }, process.env.TOKEN_SECRET as string);
     response.json({ ...result, token: `Token ${token}` });
   } catch (error) {
-    response.status(401);
+    response.status(500);
     response.json(error);
   }
 };
 
 const user_routers = (app: express.Application) => {
-  app.get('/users', indexUsers);
+  app.get('/users', verifyAuthToken, indexUsers);
   app.get('/users/:username', verifyAuthToken, showUsers);
   app.post('/users', createUsers);
   app.post('/users/authenticate', authenticate);
