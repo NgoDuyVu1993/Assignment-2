@@ -87,7 +87,7 @@ Reset database by dropping tables: `npm run migrate-down` <br/>
 
 
 # Jasmine Test Result
-The results of the test are all PASS
+The results of the test are all PASS <br/>
 ![Test Result](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Test%20Result.jpg)
 
 ## Database Schema and Endpoints
