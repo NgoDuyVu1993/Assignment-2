@@ -86,9 +86,13 @@ Run Migrate tables: `npm run migrate-up` <br/>
 Reset database by dropping tables: `npm run migrate-down` <br/>
 
 
+# Jasmine Test Result
+The results of the test are all PASS
+![Test Result](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Test Result.jpg)
+
 ## Database Schema and Endpoints
 The following diagram is the database Schema 
-(REQUIREMENTS file)(https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Store%20front%20Database%20Schema.JPG)
+[REQUIREMENTS file](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Store%20front%20Database%20Schema.JPG)
 
 # Manualy use the Server
 1. To start use the server, add and remove Users / Products / Orders, we must first get Token
