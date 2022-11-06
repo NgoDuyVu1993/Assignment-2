@@ -53,6 +53,18 @@ describe('Test Order Model Method Exists', () => {
     it('Should have a delete method', () => {
         expect(order.delete).toBeDefined();
     });
+    // Test update order quantity function exist
+    it('Should have a updateQuantity method', () => {
+        expect(order.updateQuantity).toBeDefined();
+    });
+    // Test update order userId function exist
+    it('Should have a updateUserId method', () => {
+        expect(order.updateUserId).toBeDefined();
+    });
+    // Test update order productId function exist
+    it('Should have a updateProductId method', () => {
+        expect(order.updateProductId).toBeDefined();
+    });
 });
 describe('Test Order Model Method Functional', () => {
     it('Should create an order', async () => {

@@ -56,10 +56,47 @@ const deleteOrders = async (request, response) => {
         response.json(error);
     }
 };
+//  Update Existing order function  //
+// Add quantity to an existing product
+const updateOrderQuantity = async (request, response) => {
+    try {
+        const result = await store.updateQuantity(request.body.id, request.body.quantity);
+        response.json(result);
+    }
+    catch (error) {
+        response.status(500);
+        response.json(error);
+    }
+};
+// Update new UserId  to an existing product
+const updateOrderUserId = async (request, response) => {
+    try {
+        const result = await store.updateUserId(request.body.id, request.body.user_id);
+        response.json(result);
+    }
+    catch (error) {
+        response.status(500);
+        response.json(error);
+    }
+};
+// Update new UserId  to an existing product
+const updateOrderProductId = async (request, response) => {
+    try {
+        const result = await store.updateProductId(request.body.id, request.body.product_id);
+        response.json(result);
+    }
+    catch (error) {
+        response.status(500);
+        response.json(error);
+    }
+};
 const order_routes = (app) => {
     app.get('/orders/', verifyToken_1.default, indexOrders);
     app.get('/orders/:id', verifyToken_1.default, showOrders);
     app.post('/orders', verifyToken_1.default, createOrders);
     app.delete('/orders/delete/:id', verifyToken_1.default, deleteOrders);
+    app.post('/orders/update/quantity/', verifyToken_1.default, updateOrderQuantity);
+    app.post('/orders/update/userId/', verifyToken_1.default, updateOrderUserId);
+    app.post('/orders/update/productId/', verifyToken_1.default, updateOrderProductId);
 };
 exports.default = order_routes;

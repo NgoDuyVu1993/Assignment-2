@@ -54,11 +54,52 @@ const deleteOrders = async (request: Request, response: Response) => {
   }
 };
 
+
+//  Update Existing order function  //
+
+// Add quantity to an existing product
+const updateOrderQuantity = async (request: Request, response: Response) => {
+  try {
+    const result = await store.updateQuantity(request.body.id, request.body.quantity);
+    response.json(result);
+  } catch (error) {
+    response.status(500);
+    response.json(error);
+  }
+}
+
+// Update new UserId  to an existing product
+const updateOrderUserId = async (request: Request, response: Response) => {
+  try {
+    const result = await store.updateUserId(request.body.id, request.body.user_id);
+    response.json(result);
+  } catch (error) {
+    response.status(500);
+    response.json(error);
+  }
+}
+
+// Update new UserId  to an existing product
+const updateOrderProductId = async (request: Request, response: Response) => {
+  try {
+    const result = await store.updateProductId(request.body.id, request.body.product_id);
+    response.json(result);
+  } catch (error) {
+    response.status(500);
+    response.json(error);
+  }
+}
+
+
+
 const order_routes = (app: express.Application) => {
   app.get('/orders/', verifyAuthToken, indexOrders);
   app.get('/orders/:id', verifyAuthToken, showOrders);
   app.post('/orders', verifyAuthToken, createOrders);
   app.delete('/orders/delete/:id', verifyAuthToken, deleteOrders);
+  app.post('/orders/update/quantity/', verifyAuthToken, updateOrderQuantity);
+  app.post('/orders/update/userId/', verifyAuthToken, updateOrderUserId);
+  app.post('/orders/update/productId/', verifyAuthToken, updateOrderProductId);
 };
 
 export default order_routes;

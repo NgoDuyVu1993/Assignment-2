@@ -95,5 +95,61 @@ class OrderStore {
             throw new Error(`Could not connect to the database!`);
         }
     }
+    // Update product quantity of existing order
+    async updateQuantity(order_id, quantiy) {
+        if (database_1.default) {
+            try {
+                const sql = 'UPDATE orders SET quantity=quantity+($1) WHERE id=($2)';
+                console.log(quantiy);
+                console.log(order_id);
+                const conn = await database_1.default.connect();
+                const result = await conn.query(sql, [quantiy, order_id]);
+                conn.release();
+                return result.rows[0];
+            }
+            catch (error) {
+                throw new Error(`Could not update order ${order_id} with the new quantity. Error: ${error}.`);
+            }
+        }
+        else {
+            throw new Error(`Could not connect to the database!`);
+        }
+    }
+    // Update an existing order with new user_id
+    async updateUserId(order_id, user_id) {
+        if (database_1.default) {
+            try {
+                const sql = 'UPDATE orders SET user_id=($1) WHERE id=($2)';
+                const conn = await database_1.default.connect();
+                const result = await conn.query(sql, [user_id, order_id]);
+                conn.release();
+                return result.rows[0];
+            }
+            catch (error) {
+                throw new Error(`Could not update order ${order_id} with userId ${user_id}. Error: ${error}.`);
+            }
+        }
+        else {
+            throw new Error(`Could not connect to the database!`);
+        }
+    }
+    // Update an existing order with new product_id
+    async updateProductId(order_id, product_id) {
+        if (database_1.default) {
+            try {
+                const sql = 'UPDATE orders SET product_id=($1) WHERE id=($2)';
+                const conn = await database_1.default.connect();
+                const result = await conn.query(sql, [product_id, order_id]);
+                conn.release();
+                return result.rows[0];
+            }
+            catch (error) {
+                throw new Error(`Could not update order ${order_id} with productId ${product_id}. Error: ${error}.`);
+            }
+        }
+        else {
+            throw new Error(`Could not connect to the database!`);
+        }
+    }
 }
 exports.OrderStore = OrderStore;
