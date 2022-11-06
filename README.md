@@ -107,3 +107,6 @@ The following diagram is the database Schema
 ![Authenticate](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Authenticate%20User.jpg)
 
 4. The APIs of Product and Order can be used similarly
+
+5. The APIs to update existing Orders
+![Update Orders](https://github.com/NgoDuyVu1993/Assignment-2/blob/main/img/Update%20Exist%20Order.jpg)

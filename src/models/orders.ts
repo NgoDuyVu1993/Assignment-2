@@ -8,6 +8,15 @@ export type Order = {
   product_id: number | string;
 };
 
+export type OrderUpdate = {
+  id: number | string;
+  quantity: number;
+  status: string;
+  user_id: number | string;
+  product_id: number | string;
+};
+
+
 export class OrderStore {
   // List all of the Orders
   async index(): Promise<Order[]> {

@@ -10,13 +10,13 @@ const request = (0, supertest_1.default)(server_1.default);
 const product = new products_1.ProductStore();
 let testUser;
 const productTest_1 = {
-    name: "Samsung Galaxy",
-    price: 12000,
+    name: "Nokia",
+    price: 8000,
     category: "Electronic",
 };
 const productTest_2 = {
-    name: "Iphone",
-    price: 24000,
+    name: "Samsung Galaxy",
+    price: 12000,
     category: "Electronic",
 };
 describe('Test Product Model Method Exists', () => {
@@ -58,10 +58,10 @@ describe('Test Product Model Method Functional', () => {
         const result = await product.show(2);
         expect(result?.name).toEqual(productTest_1.name);
     });
-    it('Should Delete product which has ID 1', async () => {
-        product.delete(2);
+    it('Should Delete product which has ID 4', async () => {
+        product.delete(4);
         const result = await product.index();
-        expect(result.length).toEqual(1);
+        expect(result.length).toEqual(3);
     });
 });
 describe('Test Product API Endpoint Response', () => {

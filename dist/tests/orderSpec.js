@@ -23,6 +23,13 @@ const orderTest_2 = {
     user_id: 2,
     product_id: '1'
 };
+const orderUpdate = {
+    id: 1,
+    quantity: 4,
+    status: '',
+    user_id: 2,
+    product_id: 2,
+};
 describe('Test Order Model Method Exists', () => {
     beforeAll(async () => {
         await products.create({
@@ -36,6 +43,23 @@ describe('Test Order Model Method Exists', () => {
             lastName: 'Duy Vu',
             password: '12312'
         });
+        // Test User and Product for Update Order function
+        let testUser_2 = await request.post('/users').send({
+            username: 'test-user-b',
+            firstName: 'Hoang',
+            lastName: 'Thuy Linh',
+            password: 'The Creeking'
+        });
+        let testProduct = await products.create({
+            name: "Nokia",
+            price: 4000,
+            category: "Electronic",
+        });
+    });
+    afterAll(async () => {
+        await request
+            .delete('/users/delete/2')
+            .set({ Authorization: JSON.parse(testUser.text).token });
     });
     // Test index function exist
     it('Should have an index method', () => {
@@ -53,6 +77,7 @@ describe('Test Order Model Method Exists', () => {
     it('Should have a delete method', () => {
         expect(order.delete).toBeDefined();
     });
+    //  Update Order  // 
     // Test update order quantity function exist
     it('Should have a updateQuantity method', () => {
         expect(order.updateQuantity).toBeDefined();
@@ -80,6 +105,21 @@ describe('Test Order Model Method Functional', () => {
         const result = await order.show(1);
         expect(result.user_id).toEqual(orderTest_1.user_id);
     });
+    it('Should Add 4 to the order which has quality 1', async () => {
+        await order.updateQuantity(orderUpdate.id, orderUpdate.quantity);
+        const check = await order.show(1);
+        expect(check.quantity).toEqual(5);
+    });
+    it('Should Change userId of the order', async () => {
+        await order.updateUserId(orderUpdate.id, orderUpdate.user_id);
+        const check = await order.show(2);
+        expect(check.user_id).toEqual('2');
+    });
+    it('Should Change productId of the order', async () => {
+        await order.updateProductId(orderUpdate.id, orderUpdate.user_id);
+        const check = await order.show(2);
+        expect(check.product_id).toEqual('2');
+    });
     it('Should Delete product which has userID 1', async () => {
         await order.delete(1);
         const result = await order.show(1);
@@ -94,6 +134,17 @@ describe('Test Order API Endpoint Response', () => {
             firstName: 'Joe',
             lastName: 'Rogan',
             password: 'Elon Mush'
+        });
+        let testUser_2 = await request.post('/users').send({
+            username: 'test-user-c',
+            firstName: 'Johnny',
+            lastName: 'Harris',
+            password: 'Energy Crisis'
+        });
+        let testProduct = await products.create({
+            name: "Iphone",
+            price: 24000,
+            category: "Electronic",
         });
     });
     // Test Create New Order
@@ -110,8 +161,8 @@ describe('Test Order API Endpoint Response', () => {
             .get('/orders/2')
             .set({ Authorization: JSON.parse(testUser.text).token });
         const result = JSON.parse(response.text);
-        expect(result.quantity).toEqual(4);
-        expect(result.status).toEqual('Out of Stock');
+        expect(result.quantity).toEqual(5);
+        expect(result.status).toEqual('Sold');
         expect(result.user_id).toEqual('2');
     });
     // Test Get All Orders
@@ -121,6 +172,42 @@ describe('Test Order API Endpoint Response', () => {
             .set({ Authorization: JSON.parse(testUser.text).token });
         const result = JSON.parse(response.text);
         expect(result.length).toBeTruthy();
+    });
+    // Test Update Order Quantity
+    it('Should Update order quantity in the Endpoint', async () => {
+        await request
+            .post('/orders/update/quantity/')
+            .send(orderUpdate)
+            .set({ Authorization: JSON.parse(testUser.text).token });
+        const response = await request
+            .get('/orders/2')
+            .set({ Authorization: JSON.parse(testUser.text).token });
+        const result = JSON.parse(response.text);
+        expect(result.quantity).toEqual(4);
+    });
+    // Test Update Order UserId
+    it('Should Update userId of the order in the Endpoint', async () => {
+        await request
+            .post('/orders/update/userId/')
+            .send(orderUpdate)
+            .set({ Authorization: JSON.parse(testUser.text).token });
+        const response = await request
+            .get('/orders/2')
+            .set({ Authorization: JSON.parse(testUser.text).token });
+        const result = JSON.parse(response.text);
+        expect(result.user_id).toEqual('2');
+    });
+    // Test Update Order ProductId
+    it('Should Update productId of the order in the Endpoint', async () => {
+        await request
+            .post('/orders/update/productId/')
+            .send(orderUpdate)
+            .set({ Authorization: JSON.parse(testUser.text).token });
+        const response = await request
+            .get('/orders/2')
+            .set({ Authorization: JSON.parse(testUser.text).token });
+        const result = JSON.parse(response.text);
+        expect(result.product_id).toEqual('1');
     });
     // Test Delete Order by Id
     it('Should delete a order in the Endpoint', async () => {

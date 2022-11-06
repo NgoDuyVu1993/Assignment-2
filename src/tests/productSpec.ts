@@ -7,14 +7,14 @@ const product = new ProductStore();
 let testUser: { text: string };
 
 const productTest_1: Product = {
-  name: "Samsung Galaxy",
-  price: 12000,
+  name: "Nokia",
+  price: 8000,
   category: "Electronic",
 };
 
 const productTest_2: Product = {
-  name: "Iphone",
-  price: 24000,
+  name: "Samsung Galaxy",
+  price: 12000,
   category: "Electronic",
 };
 
@@ -65,10 +65,10 @@ describe('Test Product Model Method Exists', () => {
     expect(result?.name).toEqual(productTest_1.name);
   });
 
-  it('Should Delete product which has ID 1', async () => {
-    product.delete(2);
+  it('Should Delete product which has ID 4', async () => {
+    product.delete(4);
     const result = await product.index();
-    expect(result.length).toEqual(1);
+    expect(result.length).toEqual(3);
   });
 });
 
